@@ -17,7 +17,7 @@ app._router.stack
 
 dotenv.config({ path: './prod.env' })
 const upload = multer({ dest: 'uploads/' });
-const port = 3000;
+const port = process.env.PORT || 3000;
 const asAws = Boolean(process.env.AWS_SECRET_ACCESS_KEY && process.env.AWS_ACCESS_KEY_ID && process.env.AWS_REGION && process.env.AWS_BUCKET);
 
 app.get('/casas', async (_, res) => {

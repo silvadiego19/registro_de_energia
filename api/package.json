@@ -10,8 +10,7 @@
     "dev": "concurrently npm:dev:*",
     "build:ts": "tsc",
     "build:js": "node --experimental-specifier-resolution=node ./build/routes/index.js",
-    "build": "concurrently npm:build:*",
-    "check:api": "curl --fail http://192.168.1.15:3000/casas || echo 'API não está respondendo!'"
+    "build": "concurrently npm:build:*"
   },
   "keywords": [],
   "author": "Ariel Sardinha",

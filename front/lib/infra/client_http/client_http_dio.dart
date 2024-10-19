@@ -52,7 +52,6 @@ class ClientHttpDio implements ClientHttp {
   @override
   Future<Response<T>> get<T>(Request request) async {
     try {
-      log('response: ${request.body}');
       final response = await dio.get(
         request.url,
         data: request.body,

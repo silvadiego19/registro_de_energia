@@ -12,7 +12,7 @@ export class LeituraMySqlGateway {
     async getTotalContadorByCasaId(casaId: string, initialDate?: Date, finalDate?: Date): Promise<number> {
         const connection = await connect();
         try {
-            let query = "SELECT SUM(contador) AS totalContador FROM leituras WHERE casa_id = ?";
+            let query = "SELECT SUM(contador) AS totalContador FROM leituras WHERE casas_id = ?";
             const queryParams = [casaId];
             if (initialDate && finalDate) {
                 query += " AND createAt BETWEEN ? AND ?";
@@ -33,7 +33,7 @@ export class LeituraMySqlGateway {
     async findAllByCasaId(casaId: string, initialDate?: Date, finalDate?: Date): Promise<LeituraEntity[]> {
         const connection = await connect();
         try {
-            let query = "SELECT * FROM leituras WHERE casa_id = ?";
+            let query = "SELECT * FROM leituras WHERE casas_id = ?";
             const queryParams = [casaId];
             if (initialDate && finalDate) {
                 query += " AND createAt BETWEEN ? AND ?";
@@ -55,7 +55,7 @@ export class LeituraMySqlGateway {
         const connection = await connect();
         try {
             const [result] = await connection.execute<ResultSetHeader>(
-                "INSERT INTO leituras (contador, photo, createAt, casa_id) VALUES (?, ?, ?, ?)",
+                "INSERT INTO leituras (contador, photo, createAt, casas_id) VALUES (?, ?, ?, ?)",
                 [leitura.contador, leitura.photo, toLocalSqlDate(leitura.createAt), casaId]
             );
 
@@ -81,7 +81,7 @@ export class LeituraMySqlGateway {
         const connection = await connect();
         try {
             await connection.execute(
-                "DELETE FROM leituras WHERE id = ? AND casa_id = ?",
+                "DELETE FROM leituras WHERE id = ? AND casas_id = ?",
                 [leitura.id, casaId]
             );
         } catch (error: any) {
@@ -105,7 +105,7 @@ export class LeituraMySqlGateway {
             FROM
                 leituras
             WHERE
-                casa_id = ?
+                casas_id = ?
             GROUP BY
                 DATE_FORMAT(createAt, '%Y-%m')
             ORDER BY
