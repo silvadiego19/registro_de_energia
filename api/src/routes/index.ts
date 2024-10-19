@@ -3,7 +3,7 @@ import multer from 'multer';
 import cors from 'cors';
 import { LeituraMySqlGateway } from '../gateways/leitura/leitura_gateway';
 import { LeituraEntity } from '../entities/leitura_entity';
-// import { S3Gateway } from '../gateways/s3/s3_gateway';
+import { S3Gateway } from '../gateways/s3/s3_gateway';
 import dotenv from 'dotenv';
 import { CasaGateway } from '../gateways/casa/casa_gateway';
 const app = express();
@@ -18,6 +18,7 @@ app._router.stack
 dotenv.config({ path: './prod.env' })
 const upload = multer({ dest: 'uploads/' });
 const port = 3000;
+const asAws = Boolean(process.env.AWS_SECRET_ACCESS_KEY && process.env.AWS_ACCESS_KEY_ID && process.env.AWS_REGION && process.env.AWS_BUCKET);
 
 app.get('/casas', async (_, res) => {
     try {
@@ -75,7 +76,7 @@ app.get("/leituras/resumo", async (req, res) => {
 app.post("/leitura", upload.single('photo'), async (req, res) => {
     const { contador, casaId } = req.body;
     const photo = req.file;
-    // const s3Gateway = new S3Gateway()
+    const s3Gateway = new S3Gateway()
     let urlPhoto;
     try {
         if (!casaId) {
@@ -83,10 +84,10 @@ app.post("/leitura", upload.single('photo'), async (req, res) => {
         }
 
         if (contador) {
-            // if (photo) {
-            //     await s3Gateway.uploadFileToS3(photo);
-            //     urlPhoto = s3Gateway.getFileUrl(photo);
-            // }
+            if (photo && asAws) {
+                await s3Gateway.uploadFileToS3(photo);
+                urlPhoto = s3Gateway.getFileUrl(photo);
+            }
             const leitura = new LeituraEntity(parseInt(contador), urlPhoto ?? null, new Date(), '');
             const leituraGateway = new LeituraMySqlGateway();
             const newLeitura = await leituraGateway.create(leitura, casaId);
@@ -96,9 +97,9 @@ app.post("/leitura", upload.single('photo'), async (req, res) => {
         }
 
     } catch (error: any) {
-        // if (urlPhoto) {
-        //     await s3Gateway.deleteFile(urlPhoto);
-        // }
+        if (urlPhoto && asAws) {
+            await s3Gateway.deleteFile(urlPhoto);
+        }
         return res.status(500).json({ error: error.message });
     }
 });
@@ -113,10 +114,10 @@ app.delete("/leitura", async (req, res) => {
     }
     try {
         const leituraGateway = new LeituraMySqlGateway();
-        // const s3Gateway = new S3Gateway()
+        const s3Gateway = new S3Gateway()
         await Promise.all([
             leituraGateway.delete(new LeituraEntity(contador, photo, createAt, id), casaId),
-            // photo && s3Gateway.deleteFile(photo),
+            photo && asAws && s3Gateway.deleteFile(photo),
         ]);
         return res.status(200).json({ message: "Leitura deletada com sucesso", leitura: { id, photo, contador, createAt } });
     } catch (error: any) {
