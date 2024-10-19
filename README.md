@@ -91,6 +91,7 @@ AWS_SECRET_ACCESS_KEY=
 Compile e inicie a API com o comando:
 
 ```bash
+npm rum build:ts
 npm run build
 ```
 
