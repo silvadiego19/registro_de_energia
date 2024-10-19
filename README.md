@@ -5,6 +5,7 @@ Este projeto tem como objetivo desenvolver um sistema de gestão de consumo de e
 ## Utils
 
 - **História de usuários**: [histórias](./documentacoes/historia_de_usuario.docx)
+- **Diagrama de banco de dados**: [imagem](./documentacoes/diagrama_de_banco_de_dados.PNG)
 
 ## Pré-requisitos
 
