@@ -1,5 +1,7 @@
 # Projeto Fullstack: Projeto integrador transdiciplinar 2
 
+Este projeto tem como objetivo desenvolver um sistema de gestão de consumo de energia para condomínios e residências, oferecendo maior controle e transparência sobre o uso de energia elétrica para moradores e administradores. A plataforma permite que os moradores registrem e acompanhem seu consumo mensal, com opções de visualização por período, gráficos detalhados e comparação com meses anteriores. Além disso, o sistema oferece funcionalidades administrativas para garantir a precisão dos dados de consumo e relatórios completos.
+
 ## Pré-requisitos
 
 - **Flutter SDK**: [Instalar Flutter](https://docs.flutter.dev/get-started/install)
