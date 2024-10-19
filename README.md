@@ -2,6 +2,10 @@
 
 Este projeto tem como objetivo desenvolver um sistema de gestão de consumo de energia para condomínios e residências, oferecendo maior controle e transparência sobre o uso de energia elétrica para moradores e administradores. A plataforma permite que os moradores registrem e acompanhem seu consumo mensal, com opções de visualização por período, gráficos detalhados e comparação com meses anteriores. Além disso, o sistema oferece funcionalidades administrativas para garantir a precisão dos dados de consumo e relatórios completos.
 
+## Utils
+
+- **História de usuários**: [histórias](./documentacoes/historia_de_usuario.docx)
+
 ## Pré-requisitos
 
 - **Flutter SDK**: [Instalar Flutter](https://docs.flutter.dev/get-started/install)
@@ -12,10 +16,12 @@ Este projeto tem como objetivo desenvolver um sistema de gestão de consumo de e
 
 ## Configuração do Projeto
 
-### 1. **Clone o repositório**:
+### 1. **Clone o repositório**
+
 ```bash
    git clone https://github.com/arielsardinha/registro_de_energia.git
 ```
+
 ### 2. **Crie o banco de dados no MySQL Workbench**
 
 Se você tiver dificuldades para instalar e configurar o MySQL, siga este passo a passo neste [vídeo](https://www.youtube.com/watch?v=s0YoPLbox40).
@@ -100,14 +106,14 @@ npm run build
 #### 4. **Acesse a API**
 
 A API estará disponível no endereço:  
-http://localhost:3000  
+<http://localhost:3000>  
 
 Caso a porta 3000 esteja ocupada, altere o valor no arquivo `prod.env`.
 
 #### 5. **Testando a API**
 
 Verifique se tudo está funcionando corretamente acessando a seguinte URI no navegador:  
-http://localhost:3000/casas  
+<http://localhost:3000/casas>  
 
 Isso irá listar os registros de "casas" disponíveis para logar no sistema, como a casa padrão.
 
@@ -149,10 +155,10 @@ Durante a execução, o sistema pedirá que você informe o **domínio da API**.
 ![Selecionando Domínio da API](https://github.com/user-attachments/assets/283cec70-efea-4237-91dd-2e658fb204f9)
 
 - **Emulador Android**: Caso a API esteja rodando localmente, utilize:  
-  http://10.0.2.2:3000
+  <http://10.0.2.2:3000>
 
 - **Dispositivo Físico ou emulador iOS**: Utilize:  
-  http://localhost:3000
+  <http://localhost:3000>
 
 > **Nota**: Certifique-se de que a API está rodando na porta correta. Verifique a porta em uso.
 
@@ -171,4 +177,3 @@ Utilize um usuário registrado na tabela de "casas", como o usuário **DEFAULT**
 ---
 
 Seguindo esses passos, o projeto Flutter estará em execução e você poderá utilizar o sistema conforme necessário.
-
