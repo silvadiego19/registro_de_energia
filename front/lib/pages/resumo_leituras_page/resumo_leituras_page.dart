@@ -7,7 +7,7 @@ import 'package:my_light_app/enterprise/usecases/get_leitura_resumo_usecase.dart
 import 'package:my_light_app/utils/mixins/date_formate.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
-import 'package:share_extend/share_extend.dart';
+// import 'package:share_extend/share_extend.dart';
 
 //OpenFile.open("/sdcard/example.txt", type: "text/plain", uti: "public.plain-text");
 class ResumoLeiturasPage extends StatefulWidget with DateFormatMixin {
@@ -51,15 +51,15 @@ class _ResumoLeiturasPageState extends State<ResumoLeiturasPage> {
     await file.writeAsBytes(await pdf.save());
 
     log(file.path);
-    try {
-      if (await file.exists()) {
-        await ShareExtend.share(file.path, 'file', extraText: 'Enviar PDF');
-      } else {
-        log('File not found');
-      }
-    } catch (e) {
-      log('Erro ao abrir o arquivo: $e');
-    }
+    // try {
+    //   if (await file.exists()) {
+    //     await ShareExtend.share(file.path, 'file', extraText: 'Enviar PDF');
+    //   } else {
+    //     log('File not found');
+    //   }
+    // } catch (e) {
+    //   log('Erro ao abrir o arquivo: $e');
+    // }
   }
 
   @override
