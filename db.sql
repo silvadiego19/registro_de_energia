@@ -17,7 +17,7 @@ USE `my_light_app` ;
 -- Table `my_light_app`.`casas`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `my_light_app`.`casas` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `nome_proprietario` VARCHAR(45) NOT NULL,
   `nivel_acesso` VARCHAR(45) NOT NULL DEFAULT 'comum',
   PRIMARY KEY (`id`),
@@ -28,7 +28,7 @@ ENGINE = InnoDB;
 -- Table `my_light_app`.`leituras`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `my_light_app`.`leituras` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `contador` INT NOT NULL,
   `photo` VARCHAR(45) NULL,
   `createAt` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -43,12 +43,12 @@ CREATE TABLE IF NOT EXISTS `my_light_app`.`leituras` (
 ENGINE = InnoDB;
 
 -- Inserindo casa com nível de acesso 'ADM' e nome do proprietário 'DEFAULT'
-INSERT INTO `my_light_app`.`casas` (`id`, `nome_proprietario`, `nivel_acesso`) 
-VALUES (1, 'DEFAULT', 'ADM');
+INSERT INTO `my_light_app`.`casas` (`nome_proprietario`, `nivel_acesso`) 
+VALUES ('DEFAULT', 'ADM');
 
 -- Inserindo leitura associada à casa do usuário 'DEFAULT'
-INSERT INTO `my_light_app`.`leituras` (`id`, `contador`, `photo`, `casas_id`) 
-VALUES (1, 0, '', 1);
+INSERT INTO `my_light_app`.`leituras` (`contador`, `casas_id`) 
+VALUES (0, 1);
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
